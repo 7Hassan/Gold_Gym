@@ -38,8 +38,8 @@ app.use(cookieParser()); //? to access a cookie requests
 
 //? setup express message
 app.use(async (req, res, next) => {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
+    res.locals.messages = require('express-messages')(req, res);
+    next();
 });
 
 

@@ -1,11 +1,12 @@
 {
-  "name": "DM server",
+  "name": "Gold Gym server",
   "version": "1.0.0",
   "description": "server side",
   "main": "server.js",
   "scripts": {
+    "dev": "nodemon --exec babel-node server.js",
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "both-dev": "concurrently \"npm run dev\" \"npm --prefix ../client/ run dev\""
   },
   "author": "Hassan Hossam",
   "license": "ISC",
@@ -20,7 +21,7 @@
     "connect-mongodb-session": "^3.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "en": "^1.0.1",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
@@ -36,7 +37,7 @@
     "iso-3166-1-alpha-2": "^1.0.1",
     "jsonwebtoken": "^9.0.0",
     "moment-timezone": "^0.5.41",
-    "mongoose": "^6.7.3",
+    "mongoose": "^6.12.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "node-cron": "^3.0.2",
@@ -50,13 +51,19 @@
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20",
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.0",
+    "@babel/node": "^7.22.19",
+    "@babel/preset-env": "^7.22.20",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.22",
     "parcel-bundler": "^1.12.5"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/7Hassan/Daily-Manager",
-    "bugs": "https://github.com/7Hassan/Daily-Manager/issues",
-    "homepage": "https://github.com/7Hassan/Daily-Manager#readme"
+    "url": "https://github.com/7Hassan/Gold_Gym",
+    "bugs": "https://github.com/7Hassan/Gold_Gym/issues",
+    "homepage": "https://github.com/7Hassan/Gold_Gym#readme"
   }
 }
