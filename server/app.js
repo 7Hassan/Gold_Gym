@@ -24,11 +24,12 @@ app.use(morgan('common'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use(cors({
-  origin: 'https://your-vercel-app.vercel.app', // Replace with your Vercel app's domain
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: 'https://goldgym-six.vercel.app', 
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true,
+// }));
+
 app.use(mongoSanitize())
 app.use(xssClean())
 app.use(hpp())
