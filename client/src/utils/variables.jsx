@@ -62,3 +62,5 @@ export const equipments = [
   "weighted",
   "wheel roller"
 ]
+
+export const url = 'https://goldgym-kfel.onrender.com'

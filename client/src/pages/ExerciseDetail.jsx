@@ -7,6 +7,7 @@ import HorizontalScrollbar from '../components/HorizontalScrollbar';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { url } from '../utils/variables';
 
 const Equipments = ({ exercises, setSimilarExercises }) => {
   const [equipment, setEquipment] = useState('all');
@@ -40,7 +41,7 @@ const OtherExercises = ({ exerciseDetail }) => {
   const [similarExercises, setSimilarExercises] = useState([]);
   useEffect(() => {
     window.scrollTo({ top: 0 });
-    axios.post('/api/exercises', { bodyPart, target })
+    axios.post(`${url}/api/exercises`, { bodyPart, target })
       .then((res) => {
         if (!res.data.success) throw new Error(res.data.msg);
         setExercises(res.data.data)
@@ -73,7 +74,7 @@ const ExerciseDetail = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
-    axios.post('/api/exercises', { id })
+    axios.post(`${url}/api/exercises`, { id })
       .then((res) => {
         if (!res.data.success) throw new Error(res.data.msg);
         setExerciseDetail(res.data.data[0])

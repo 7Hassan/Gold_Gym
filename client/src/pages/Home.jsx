@@ -4,7 +4,7 @@ import Exercises from '../components/Exercises';
 import SearchExercises from '../components/SearchExercises';
 import HeroBanner from '../components/HeroBanner';
 import HorizontalScrollbar from '../components/HorizontalScrollbar';
-import { bodyParts } from '../utils/variables';
+import { bodyParts, url } from '../utils/variables';
 import { updateMuscles } from '../utils/helpers';
 import PropTypes from 'prop-types';
 import { useGet } from '../services/api/get';
@@ -19,7 +19,7 @@ const Filter = ({ setExercises }) => {
   const muscles = useMemo(() => updateMuscles(bodyPart), [bodyPart]);
 
   useEffect(() => {
-    axios.post('/api/exercises', { bodyPart, target })
+    axios.post(`${url}/api/exercises`, { bodyPart, target })
       .then((res) => {
         if (!res.data.success) throw new Error(res.data.msg);
         setExercises(res.data.data)
