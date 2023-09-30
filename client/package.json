@@ -1,6 +1,5 @@
 {
   "name": "gold-gym",
-  "proxy": "https://goldgym-kfel.onrender.com",
   "private": false,
   "version": "1.0.0",
   "type": "module",
