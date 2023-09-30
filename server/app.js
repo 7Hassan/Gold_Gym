@@ -13,7 +13,7 @@ const cors = require('cors')
 const helmet = require('helmet');
 const app = express();
 
-dotenv.config({ path: './.env' }); 
+dotenv.config({ path: './.env' });
 app.use(express.json())
 app.enable('trust proxy')
 app.use(morgan('tiny'))
@@ -23,7 +23,12 @@ app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }))
 app.use(morgan('common'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cors());
+
+app.use(cors({
+  origin: 'https://your-vercel-app.vercel.app', // Replace with your Vercel app's domain
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
 app.use(mongoSanitize())
 app.use(xssClean())
 app.use(hpp())
