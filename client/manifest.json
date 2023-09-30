@@ -1,0 +1,22 @@
+{
+  "short_name": "Gold Gym",
+  "name": "Gold Gym",
+  "background_color": "#fff",
+  "theme_color": "#ff2625",
+  "id": "/",
+  "start_url": "./",
+  "display": "standalone",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "./src/assets/images/Logo.png",
+      "size": "168x168",
+      "type": "image/png"
+    },
+    {
+      "src": "./src/assets/images/Logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
