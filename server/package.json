@@ -1,5 +1,5 @@
 {
-  "name": "Gold Gym server",
+  "name": "goldgym",
   "version": "1.0.0",
   "description": "server side",
   "main": "server.js",
