@@ -63,4 +63,4 @@ export const equipments = [
   "wheel roller"
 ]
 
-export const url = 'https://goldgym-kfel.onrender.com'
+export const url = 'https://gold-gym-server.vercel.app'
