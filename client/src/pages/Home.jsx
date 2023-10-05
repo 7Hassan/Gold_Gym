@@ -7,18 +7,20 @@ import HorizontalScrollbar from '../components/HorizontalScrollbar';
 import { bodyParts, url } from '../utils/variables';
 import { updateMuscles } from '../utils/helpers';
 import PropTypes from 'prop-types';
-import { useGet } from '../services/api/get';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 
 
 const Filter = ({ setExercises }) => {
-  const [bodyPart, setBodyPart] = useState('all');
-  const [target, setTarget] = useState('all');
+  const [bodyPart, setBodyPart] = useState(bodyParts[0]);
   const muscles = useMemo(() => updateMuscles(bodyPart), [bodyPart]);
+  const [target, setTarget] = useState(muscles[0]);
 
+
+  useEffect(() => { setTarget(muscles[0]) }, [muscles])
   useEffect(() => {
+    if (!bodyPart || !target) return;
     axios.post(`${url}/api/exercises`, { bodyPart, target })
       .then((res) => {
         if (!res.data.success) throw new Error(res.data.msg);
@@ -31,18 +33,17 @@ const Filter = ({ setExercises }) => {
       })
   }, [bodyPart, target, setExercises])
 
-  useEffect(() => setTarget('all'), [bodyPart]);
   return <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>
     <div className="selectors">
       <h3>Body Parts</h3>
       <div className="container-sel">
-        <HorizontalScrollbar data={['all', ...bodyParts]} setBodyPart={setBodyPart} bodyPart={bodyPart} />
+        <HorizontalScrollbar data={[...bodyParts]} setBodyPart={setBodyPart} bodyPart={bodyPart} />
       </div>
     </div>
     <div className="selectors muscles">
       <h3>Muscles</h3>
       <div className="container-sel">
-        <HorizontalScrollbar data={['all', ...muscles]} setBodyPart={setTarget} bodyPart={target} />
+        <HorizontalScrollbar data={[...muscles]} setBodyPart={setTarget} bodyPart={target} />
       </div>
     </div>
   </Box>
@@ -55,7 +56,6 @@ Filter.propTypes = {
 
 const Home = () => {
   const [exercises, setExercises] = useState([]);
-  useGet(setExercises)
   return <Box>
     <HeroBanner />
     <SearchExercises setExercises={setExercises} />

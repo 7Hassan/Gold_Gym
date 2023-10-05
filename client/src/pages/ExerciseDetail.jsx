@@ -10,13 +10,12 @@ import { toast } from 'react-toastify';
 import { url } from '../utils/variables';
 
 const Equipments = ({ exercises, setSimilarExercises }) => {
-  const [equipment, setEquipment] = useState('all');
   const equipments = useMemo(() => Array.from(new Set(exercises.map(ex => ex.equipment))),
     [exercises])
+  const [equipment, setEquipment] = useState(equipments[0]);
 
-
+  useEffect(() => { setEquipment(equipments[0]) }, [equipments]);
   useEffect(() => {
-    if (equipment === 'all') return setSimilarExercises(exercises)
     const exs = exercises.filter(ex => ex.equipment === equipment)
     setSimilarExercises(exs)
   }, [equipment, exercises, setSimilarExercises]);
@@ -25,7 +24,9 @@ const Equipments = ({ exercises, setSimilarExercises }) => {
   return <div className="selectors muscles">
     <h3>Equipments</h3>
     <div className="container-sel">
-      <HorizontalScrollbar data={['all', ...equipments]} setBodyPart={setEquipment} bodyPart={equipment} />
+      {equipment &&
+        <HorizontalScrollbar data={[...equipments]} setBodyPart={setEquipment} bodyPart={equipment} />
+      }
     </div>
   </div>
 }

@@ -17,7 +17,8 @@ export const musclesParts = [
   "spine",
   "traps",
   "triceps",
-  "upper back"];
+  "upper back"
+];
 
 export const bodyParts = [
   "cardio",
@@ -25,7 +26,6 @@ export const bodyParts = [
   "chest",
   "lower arms",
   "lower legs",
-  "neck",
   "shoulders",
   "upper arms",
   "upper legs",

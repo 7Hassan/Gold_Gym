@@ -1,46 +1,53 @@
 import { useState } from 'react';
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { musclesParts, bodyParts } from '../utils/variables'
-import { useGet } from '../services/api/get';
+import { musclesParts, bodyParts, equipments } from '../utils/variables'
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { url } from '../utils/variables';
 
 
-const options = [...bodyParts, ...musclesParts]
+const options = [
+  ...bodyParts.map(value => ({ name: 'Body part', ref: 'bodyPart', value })),
+  ...musclesParts.map(value => ({ name: 'Muscle', ref: 'equipment', value })),
+  ...equipments.map(value => ({ name: 'Equipment', ref: 'target', value })),
+];
 
 const SearchExercises = ({ setExercises }) => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState('');
   const [searchOptions, setSearchOptions] = useState([]);
-  useGet(setData)
 
-  const handleSearch = async (op = null) => {
-    const searchStr = op || search
-    const index = options.findIndex(op => op.includes(searchStr));
-    if (index < 0) return
-    const searchedExercises = data.filter(
-      (item) => item.target.toLowerCase().includes(searchStr)
-        || item.bodyPart.toLowerCase().includes(searchStr)
-    );
-    window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
-    setExercises(searchedExercises);
-    setSearchOptions([])
+
+  const handleGetEx = async (op) => {
+    axios.post(`${url}/api/exercises`, { [op.ref]: op.value })
+      .then((res) => {
+        if (!res.data.success) throw new Error(res.data.msg);
+        setExercises(res.data.data)
+      }).catch((err) => {
+        toast.error(err.message, {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 5000,
+        });
+      })
   };
 
   const handleClickOptions = (op) => {
-    setSearch(op)
-    handleSearch(op)
+    setSearch(op.value)
+    handleGetEx(op)
     setSearchOptions([])
+    window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
   }
 
   const handleChangeInput = (e) => {
     const searchValue = e.target.value.toLowerCase()
-    const opArray = options.filter(op => op.includes(searchValue));
+    const opArray = options.filter(op => op.value.includes(searchValue));
     setSearchOptions(opArray);
     setSearch(searchValue)
   }
   return (
     <Stack alignItems="center" mt="37px" justifyContent="center" p="20px"
-      onClick={() => setSearchOptions([])}>
+      onClick={() => setSearchOptions([])} className='s-in'>
       <Typography fontWeight={700} sx={{ fontSize: { lg: '44px', xs: '30px' } }} mb="49px" textAlign="center">
         Awesome Exercises You <br /> Should Know
       </Typography>
@@ -53,14 +60,18 @@ const SearchExercises = ({ setExercises }) => {
           placeholder="Search Exercises"
           type="text"
         />
-        <Button className="search-btn" sx={{ bgcolor: '#FF2625', color: '#fff', textTransform: 'none', width: { lg: '173px', xs: '80px' }, height: '56px', position: 'absolute', right: '0px', fontSize: { lg: '20px', xs: '14px' } }}
-          onClick={() => handleSearch()}>
-          Search
-        </Button>
         <div className={`search-options ${searchOptions.length > 0 && 'active'}`}>
           <div className="container-op">
             {
-              searchOptions.map((op) => <div key={op} onClick={() => handleClickOptions(op)}>{op}</div>)
+              searchOptions.map((op) =>
+              (
+                <div key={op.value} onClick={() => handleClickOptions(op)}
+                  className='search-name'>
+                  {op.value}
+                  <span className='name'> {op.name}</span>
+                </div>
+
+              ))
             }
           </div>
         </div>
@@ -74,5 +85,4 @@ export default SearchExercises;
 SearchExercises.propTypes = {
   setExercises: PropTypes.func.isRequired,
 };
-
 

@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Stack } from '@mui/material';
 import Logo from '../assets/images/Logo.png';
 
