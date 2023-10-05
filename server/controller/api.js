@@ -4,6 +4,7 @@ const catchError = require('../Errors/catch')
 
 exports.exercises = catchError(async (req, res, next) => {
   const exercises = await Exercises.find({});
+  console.log('🚀 ~ exercises:', exercises)
   res.status(200).json({ success: true, data: exercises })
 })
 

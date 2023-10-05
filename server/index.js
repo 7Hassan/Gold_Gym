@@ -11,6 +11,7 @@ const DBLink = process.env.DATA_BASE_URL.replace('<DATABASENAME>', process.env.D
 const port = process.env.PORT || 8000
 
 //? connect with DataBase
+mongoose.set('strictQuery', false);
 mongoose.connect(DBLink).then(() => console.log('✅ connect with DataBase'))
 //? Run server                                                                                                     
 const server = app.listen(port, () => console.log(`✅ app listening on port ${port}`))
