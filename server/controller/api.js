@@ -3,8 +3,7 @@ const catchError = require('../Errors/catch')
 
 
 exports.exercises = catchError(async (req, res, next) => {
-  const exercises = await Exercises.find({});
-  console.log('🚀 ~ exercises:', exercises)
+  const exercises = await Exercises.find({}).limit(10)
   res.status(200).json({ success: true, data: exercises })
 })
 
