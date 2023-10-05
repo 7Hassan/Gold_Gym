@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(cors({
-  origin: 'https://gold-gym-eta.vercel.app', 
+  origin: 'https://gold-gym-eta.vercel.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
@@ -40,12 +40,11 @@ app.use(cookieParser()); //? to access a cookie requests
 
 //? setup express message
 app.use(async (req, res, next) => {
-    res.locals.messages = require('express-messages')(req, res);
-    next();
+  res.locals.messages = require('express-messages')(req, res);
+  next();
 });
 
-
-
+app.get('/', (req, res) => { res.status(200).json({ success: true, data: 'Hello' }) });
 app.use('/api', require('./routes/api'));
 app.all('*', (req, res, next) => next(new AppError('not found', 404)))
 app.use(errorHandler)

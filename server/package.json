@@ -1,15 +1,14 @@
 {
   "name": "goldgym",
   "version": "1.0.0",
-  "description": "server side",
+  "description": "index side",
   "engines": {
     "node": "18.x"
   },
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node server.js",
-    "start": "node server.js",
-    "both-dev": "concurrently \"npm run dev\" \"npm --prefix ../client/ run dev\""
+    "dev": "nodemon --exec babel-node index.js",
+    "start": "node index.js"
   },
   "author": "Hassan Hossam",
   "license": "ISC",
