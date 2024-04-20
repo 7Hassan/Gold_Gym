@@ -63,4 +63,6 @@ export const equipments = [
   "wheel roller"
 ]
 
-export const url = 'https://gold-gym-server.vercel.app'
+// export const url = 'https://gold-gym-server.vercel.app'
+// export const url = 'http://localhost:8000'
+export const url = import.meta.env.VITE_API_URL;
