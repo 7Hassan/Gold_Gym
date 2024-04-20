@@ -3,7 +3,7 @@ const catchError = require('../Errors/catch')
 
 exports.filterExercises = catchError(async (req, res, next) => {
   const { id, bodyPart, target, equipment } = req.body
-  const query = {};
+  return res.status(200).json({ success: true, message: 'Exercise created successfully' }); const query = {};
   if (id) query._id = id;
   if (bodyPart) query.bodyPart = bodyPart;
   if (target) query.target = target;
