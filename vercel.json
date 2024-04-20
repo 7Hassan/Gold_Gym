@@ -5,8 +5,8 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/server/index.js"
-    },
-    {"source": "/(.*)", "destination": "/"}
+      "destination": "/app/index.js"
+    }
+    // {"source": "/(.*)", "destination": "/"}
   ]
 }
