@@ -29,12 +29,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 //   credentials: true,
 // }));
-app.use(cors({
-  origin: 'http://localhost:5173',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: 'http://localhost:5173',
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true,
+// }));
 
+app.use(cors())
 
 app.use(mongoSanitize())
 app.use(xssClean())
