@@ -7,6 +7,5 @@
       "source": "/api/(.*)",
       "destination": "/app/index.js"
     }
-    // {"source": "/(.*)", "destination": "/"}
   ]
 }
