@@ -2,13 +2,10 @@
   "buildCommand": "npm install && ./node_modules/vite/bin/vite.js build",
   "outputDirectory": "client/dist",
   "framework": "vite",
-  "routes": [
-    { "src": "/(.*)", "dest": "client/dist/$1" }
-  ],
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/client/dist/index.html"
+      "destination": "/"
     }
   ]
 }
