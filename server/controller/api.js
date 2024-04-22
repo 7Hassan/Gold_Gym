@@ -5,6 +5,7 @@ const catchError = require('../Errors/catch')
 exports.filterExercises = catchError(async (req, res, next) => {
   const { id, bodyPart, target, equipment } = req.body
   const languageCode = req.cookies.i18next;
+  console.log('🚀 ~ req.cookies:', req.cookies)
   let exercises, query = {};
   if (id) query._id = id;
   if (bodyPart) query.bodyPart = bodyPart;
