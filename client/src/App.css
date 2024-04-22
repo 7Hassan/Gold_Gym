@@ -75,8 +75,14 @@ a.active {
   width: 700px;
   height: 900px;
   margin-top: -330px;
-
 }
+
+[dir='rtl'] .hero-banner-img {
+  left: 0;
+  right: unset;
+}
+
+
 
 .exercise-card {
   width: 400px;
@@ -103,7 +109,7 @@ a.active {
 }
 
 .exercise-card:hover {
-  transform: scale(1.1, 1.1);
+  transform: scale(1.05, 1.05);
 }
 
 .react-horizontal-scrolling-menu--inner-wrapper,
@@ -297,4 +303,25 @@ a.active {
   justify-content: center;
   align-items: center;
   color: white;
+}
+
+[dir='rtl'] .similar-ex {
+  flex-direction: row-reverse;
+}
+.similar-ex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+
+.language-sw button {
+  background-color: rgb(255, 38, 37);
+  border-radius: 4px;
+  border: 1px solid rgb(255, 38, 37);
+  padding: 3px 16px;
+  color: white;
+  width: 58px;
+  cursor: pointer;
 }

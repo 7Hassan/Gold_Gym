@@ -4,6 +4,7 @@ import { Box, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import ExerciseCard from './ExerciseCard';
 import Loader from './Loader';
+import { useTranslation } from 'react-i18next';
 
 const Exercises = ({ exercises }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,12 +13,13 @@ const Exercises = ({ exercises }) => {
   const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
   const currentExercises = exercises.slice(indexOfFirstExercise, indexOfLastExercise);
   const paginate = (event, value) => { setCurrentPage(value) };
+  const { t } = useTranslation();
 
 
   if (!currentExercises.length) return <Loader />;
   return (
     <Box id="exercises" sx={{ mt: { lg: '109px' } }} mt="50px" p="20px">
-      <Typography variant="h4" fontWeight="bold" sx={{ fontSize: { lg: '44px', xs: '30px' } }} mb="46px">Showing Results</Typography>
+      <Typography variant="h4" fontWeight="bold" textAlign='center' sx={{ fontSize: { lg: '50px', xs: '44px' } }} mb="100px">{t('All Exercises')}</Typography>
       <Stack direction="row" sx={{ gap: { lg: '107px', xs: '50px' } }} flexWrap="wrap" justifyContent="center">
         {currentExercises.map((exercise, idx) => (
           <ExerciseCard key={idx} exercise={exercise} />

@@ -8,11 +8,14 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { url } from '../utils/variables';
+import { useTranslation } from 'react-i18next';
+
 
 const Equipments = ({ exercises, setSimilarExercises }) => {
   const equipments = useMemo(() => Array.from(new Set(exercises.map(ex => ex.equipment))),
     [exercises])
   const [equipment, setEquipment] = useState(equipments[0]);
+  const { t } = useTranslation();
 
   useEffect(() => { setEquipment(equipments[0]) }, [equipments]);
   useEffect(() => {
@@ -22,7 +25,7 @@ const Equipments = ({ exercises, setSimilarExercises }) => {
 
 
   return <div className="selectors muscles">
-    <h3>Equipments</h3>
+    <h3 style={{ fontSize: '35px', margin: '50px 0 20px' }}>{t('Equipments')}</h3>
     <div className="container-sel">
       {equipment &&
         <HorizontalScrollbar data={[...equipments]} setBodyPart={setEquipment} bodyPart={equipment} />
@@ -40,9 +43,11 @@ const OtherExercises = ({ exerciseDetail }) => {
   const { bodyPart, target } = exerciseDetail
   const [exercises, setExercises] = useState([]);
   const [similarExercises, setSimilarExercises] = useState([]);
+  const { i18n } = useTranslation();
+
   useEffect(() => {
     window.scrollTo({ top: 0 });
-    axios.post(`${url}/api/exercises`, { bodyPart, target })
+    axios.post(`${url}/api/exercises`, { bodyPart, target }, { withCredentials: true })
       .then((res) => {
         if (!res.data.success) throw new Error(res.data.msg);
         setExercises(res.data.data)
@@ -52,14 +57,14 @@ const OtherExercises = ({ exerciseDetail }) => {
           autoClose: 5000,
         });
       })
-  }, [bodyPart, target]);
+  }, [bodyPart, target, i18n.language]);
 
 
   return <>
     <Equipments
       exercises={exercises}
       setSimilarExercises={setSimilarExercises} />
-    <SimilarExercises similarExercises={similarExercises} />
+    <SimilarExercises similarExercises={similarExercises} target={target} />
   </>
 }
 
@@ -72,10 +77,11 @@ OtherExercises.propTypes = {
 const ExerciseDetail = () => {
   const { id } = useParams();
   const [exerciseDetail, setExerciseDetail] = useState(null);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
-    axios.post(`${url}/api/exercises`, { id })
+    axios.post(`${url}/api/exercises`, { id }, { withCredentials: true })
       .then((res) => {
         if (!res.data.success) throw new Error(res.data.msg);
         setExerciseDetail(res.data.data[0])
@@ -85,7 +91,7 @@ const ExerciseDetail = () => {
           autoClose: 5000,
         });
       })
-  }, [id]);
+  }, [id, i18n.language]);
 
   return <div>
     {

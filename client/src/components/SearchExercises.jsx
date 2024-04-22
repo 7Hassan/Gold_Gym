@@ -5,6 +5,7 @@ import { musclesParts, bodyParts, equipments } from '../utils/variables'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { url } from '../utils/variables';
+import { useTranslation } from 'react-i18next';
 
 
 const options = [
@@ -17,10 +18,11 @@ const SearchExercises = ({ setExercises }) => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState('');
   const [searchOptions, setSearchOptions] = useState([]);
+  const { t } = useTranslation();
 
 
   const handleGetEx = async (op) => {
-    axios.post(`${url}/api/exercises`, { [op.ref]: op.value })
+    axios.post(`${url}/api/exercises`, { [op.ref]: op.value }, { withCredentials: true })
       .then((res) => {
         if (!res.data.success) throw new Error(res.data.msg);
         setExercises(res.data.data)
@@ -49,7 +51,7 @@ const SearchExercises = ({ setExercises }) => {
     <Stack alignItems="center" mt="37px" justifyContent="center" p="20px"
       onClick={() => setSearchOptions([])} className='s-in'>
       <Typography fontWeight={700} sx={{ fontSize: { lg: '44px', xs: '30px' } }} mb="49px" textAlign="center">
-        Awesome Exercises You <br /> Should Know
+        {t('Exercises')}
       </Typography>
       <Box position="relative" mb="72px" >
         <TextField

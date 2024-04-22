@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import BodyPartImage from '../assets/icons/body-part.png';
 import TargetImage from '../assets/icons/target.png';
 import EquipmentImage from '../assets/icons/equipment.png';
+import { useTranslation } from 'react-i18next';
 
 const Detail = ({ exerciseDetail }) => {
   const { bodyPart, gifUrl, name, target, equipment, instructions } = exerciseDetail;
+  const { t } = useTranslation();
 
   const extraDetail = [
     {
@@ -29,7 +31,6 @@ const Detail = ({ exerciseDetail }) => {
         <Typography sx={{ fontSize: { lg: '64px', xs: '30px' } }} fontWeight={700} textTransform="capitalize">
           {name}
         </Typography>
-        {/* <Typography sx={{ fontSize: { lg: '24px', xs: '18px' } }} color="#4F4C4C"> */}
         <div className="instructions">
           {
             instructions.map((ins, i) => {
@@ -40,14 +41,13 @@ const Detail = ({ exerciseDetail }) => {
             })
           }
         </div>
-        {/* </Typography> */}
         {extraDetail?.map((item) => (
           <Stack key={item.icon} direction="row" gap="24px" alignItems="center">
             <Button sx={{ background: '#FFF2DB', borderRadius: '50%', width: '100px', height: '100px' }}>
               <img src={item.icon} alt={bodyPart} style={{ width: '50px', height: '50px' }} />
             </Button>
             <Typography textTransform="capitalize" sx={{ fontSize: { lg: '30px', xs: '20px' } }}>
-              {item.name}
+              {t(`${item.name}`)}
             </Typography>
           </Stack>
         ))}

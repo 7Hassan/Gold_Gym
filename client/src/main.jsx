@@ -5,6 +5,8 @@ import Root from './pages/root';
 import Home from './pages/Home';
 import ExerciseDetail from './pages/ExerciseDetail';
 import './App.css';
+import './i18n'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
