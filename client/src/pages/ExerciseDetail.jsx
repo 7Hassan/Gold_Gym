@@ -9,6 +9,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { url } from '../utils/variables';
 import { useTranslation } from 'react-i18next';
+import cookies from 'js-cookie';
 
 
 const Equipments = ({ exercises, setSimilarExercises }) => {
@@ -47,7 +48,7 @@ const OtherExercises = ({ exerciseDetail }) => {
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
-    axios.post(`${url}/api/exercises`, { bodyPart, target }, { withCredentials: true })
+    axios.post(`${url}/api/exercises`, { bodyPart, target, lang: cookies.get('i18next') }, { withCredentials: true })
       .then((res) => {
         if (!res.data.success) throw new Error(res.data.msg);
         setExercises(res.data.data)
@@ -81,7 +82,7 @@ const ExerciseDetail = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
-    axios.post(`${url}/api/exercises`, { id }, { withCredentials: true })
+    axios.post(`${url}/api/exercises`, { id, lang: cookies.get('i18next') })
       .then((res) => {
         if (!res.data.success) throw new Error(res.data.msg);
         setExerciseDetail(res.data.data[0])

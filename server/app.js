@@ -26,8 +26,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(cors({
   origin: process.env.FRONT_URL,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
+
+// app.use(cors());
 
 app.use(mongoSanitize())
 app.use(xssClean())

@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import cookies from 'js-cookie';
 
 
 const Filter = ({ setExercises }) => {
@@ -21,7 +22,7 @@ const Filter = ({ setExercises }) => {
   useEffect(() => { setTarget(muscles[0]) }, [muscles])
   useEffect(() => {
     if (!bodyPart || !target) return;
-    axios.post(`${url}/api/exercises`, { bodyPart, target }, { withCredentials: true })
+    axios.post(`${url}/api/exercises`, { bodyPart, target, lang: cookies.get('i18next') })
       .then((res) => {
         if (!res.data.success) throw new Error(res.data.msg);
         setExercises(res.data.data)

@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
-  return <Stack direction="row" justifyContent="space-around" sx={{ gap: { sm: '25px', xs: '10px' }, mt: { sm: '32px', xs: '20px' }, justifyContent: 'none' }} px="20px">
+  return <Stack direction="row" justifyContent="space-around" sx={{ gap: { sm: '25px', xs: '10px' }, mt: { sm: '32px', xs: '20px' }, justifyContent: 'none' }}>
     <Link to="/">
       <img src={Logo} alt="logo" style={{ width: '48px', height: '48px', margin: '0px 20px' }} />
     </Link>
